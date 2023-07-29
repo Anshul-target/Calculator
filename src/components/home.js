@@ -1,4 +1,12 @@
+// import { HandleClick } from "../code/handleClick";
+import { useState } from "react"
 export const Calculator = () => {
+
+    const [number, setNumber] = useState("")
+    const handleClick = ({ target }) => {
+
+        setNumber(target.textContent)
+    }
 
     return (
         <div className="container">
@@ -10,30 +18,30 @@ export const Calculator = () => {
                     <div className="output-box boxes">23</div>
                     <div className="input-box boxes">32</div>
                 </div>
-                <div className="items small-font">&radic;</div>
-                <div className="items small-font">   &pi;</div>
-                <div className="items small-font">^</div>
-                <div className="items small-font">!</div>
-                <div className="items" style={{ backgroundColor: "#0F5324" }}>AC</div>
-                <div className="items" style={{ backgroundColor: "#004A77" }}>( )</div>
-                <div className="items" style={{ backgroundColor: "#004A77" }}>% </div>
-                <div className="items" style={{ backgroundColor: "#004A77" }}>/</div>
-                <div className="items">7</div>
-                <div className="items">8</div>
-                <div className="items">9</div>
-                <div className="items" style={{ backgroundColor: "#004A77" }}>*</div>
-                <div className="items">4</div>
-                <div className="items">5</div>
-                <div className="items">6</div>
-                <div className="items" style={{ backgroundColor: "#004A77" }}>-</div>
-                <div className="items">1</div>
-                <div className="items">2</div>
-                <div className="items">3</div>
-                <div className="items" style={{ backgroundColor: "#004A77" }}>+</div>
-                <div className="items">0</div>
-                <div className="items">.</div>
-                <div className="items">  &times;</div>
-                <div className="items" style={{ backgroundColor: "#004A77" }}>=</div>
+                <button type="button" className="items small-font">&radic;</button>
+                <button type="button" className="items small-font">   &pi;</button>
+                <button type="button" className="items small-font">^</button>
+                <button type="button" className="items small-font">!</button>
+                <button type="button" className="items" style={{ backgroundColor: "#0F5324" }}>AC</button>
+                <button type="button" className="items" style={{ backgroundColor: "#004A77" }}>( )</button>
+                <button type="button" className="items" style={{ backgroundColor: "#004A77" }}>% </button>
+                <button type="button" className="items" style={{ backgroundColor: "#004A77" }}>/</button>
+                <button type="button" className="items" onClick={handleClick}>7</button>
+                <button type="button" className="items" onClick={handleClick}>8</button>
+                <button type="button" className="items" onClick={handleClick}>9</button>
+                <button type="button" className="items" style={{ backgroundColor: "#004A77" }}>*</button>
+                <button type="button" className="items" onClick={handleClick}>4</button>
+                <button type="button" className="items" onClick={handleClick}>5</button>
+                <button type="button" className="items" onClick={handleClick}>6</button>
+                <button type="button" className="items" style={{ backgroundColor: "#004A77" }}>-</button>
+                <button type="button" className="items" onClick={handleClick}>1</button>
+                <button type="button" className="items" onClick={handleClick}>2</button>
+                <button type="button" className="items" onClick={handleClick}>3</button>
+                <button type="button" className="items" style={{ backgroundColor: "#004A77" }}>+</button>
+                <button type="button" className="items" onClick={handleClick}>0</button>
+                <button type="button" className="items" onClick={handleClick}>.</button>
+                <button type="button" className="items">  &times;</button>
+                <button type="button" className="items" style={{ backgroundColor: "#004A77" }}>=</button>
 
 
             </div>

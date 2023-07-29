@@ -57,6 +57,8 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #28282a;
+  border: none;
+  outline: none;
 }
 
 .small-font {
