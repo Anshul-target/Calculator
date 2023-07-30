@@ -11,6 +11,7 @@ export const Calculator = () => {
     }, [isShowResult])
     const handleClick = ({ target }) => {
         setNumber(n => n + target.textContent);
+        console.log(number);
         if (!isOnceClicked) {
             let operator = number.charAt(number.length - 1);
             if (operator == "+" || operator == "-" || operator == "*" || operator == "/" || operator == "%") {
@@ -46,6 +47,7 @@ export const Calculator = () => {
     const showResult = () => {
 
         const findSymbol = number.charAt(number.length - 1)
+        console.log(number);
         // if (isShowResult) {
         if (findSymbol == "%" || findSymbol == "*" || findSymbol == "/" || findSymbol == "-" || findSymbol == "+") {
             // setNumber("Syntax Error");
@@ -60,7 +62,7 @@ export const Calculator = () => {
 
         }
 
-        setResult(n => (eval(n)).toString());
+        setResult(n => (eval(number)).toString());
     }
 
     return (
