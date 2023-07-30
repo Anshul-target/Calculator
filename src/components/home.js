@@ -1,12 +1,16 @@
 // import { HandleClick } from "../code/handleClick";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export const Calculator = () => {
+    const [isShowResult, setShowResult] = useState(false);
     const [isOnceClicked, setIsOnceClicked] = useState(false)
     const [number, setNumber] = useState("");
-    const [result, setResult] = useState("")
+    const [result, setResult] = useState("");
+    useEffect(() => {
+        setShowResult(true);
+    }, [isShowResult])
     const handleClick = ({ target }) => {
-        setNumber(n => n + target.textContent);
+        setNumber(number + target.textContent);
         if (!isOnceClicked) {
             let operator = number.charAt(number.length - 1);
             if (operator == "+" || operator == "-" || operator == "*" || operator == "/" || operator == "%") {
@@ -20,8 +24,8 @@ export const Calculator = () => {
         }
     }
     const handleAc = () => {
-        setNumber("")
-        setResult("")
+        setNumber("");
+        setResult("");
     }
     const handleClear = () => {
 
@@ -40,11 +44,14 @@ export const Calculator = () => {
     const showResult = () => {
 
         const findSymbol = number.charAt(number.length - 1)
+        // if (isShowResult) {
         if (findSymbol == "%" || findSymbol == "*" || findSymbol == "/" || findSymbol == "-" || findSymbol == "+") {
-            setNumber("Syntax Error");
-            setResult("");
-            return;
+            // setNumber("Syntax Error");
+            // setResult("");
+            // setResult(false);
+            return
         }
+
         if (number == "") {
             setResult("")
             return
