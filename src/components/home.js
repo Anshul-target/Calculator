@@ -2,11 +2,16 @@
 import { useState } from "react"
 
 export const Calculator = () => {
-
+    const [isOnceClicked, setIsOnceClicked] = useState(false)
     const [number, setNumber] = useState("");
     const [result, setResult] = useState("")
     const handleClick = ({ target }) => {
-        setNumber(number + target.textContent);
+        setNumber(n => n + target.textContent);
+        if (!isOnceClicked) {
+            if (number.charAt(number.length - 1)) {
+                showResult()
+            }
+        }
         // showResult();
     }
     const handleAc = () => {
