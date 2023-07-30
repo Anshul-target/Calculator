@@ -21,6 +21,7 @@ export const Calculator = () => {
     }
     const handleAc = () => {
         setNumber("")
+        setResult("")
     }
     const handleClear = () => {
 
