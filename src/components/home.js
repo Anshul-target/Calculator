@@ -9,10 +9,14 @@ export const Calculator = () => {
         setNumber(n => n + target.textContent);
         if (!isOnceClicked) {
             if (number.charAt(number.length - 1)) {
-                showResult()
+                showResult();
+                setIsOnceClicked(true);
             }
         }
-        // showResult();
+        if (isOnceClicked) {
+
+            showResult();
+        }
     }
     const handleAc = () => {
         setNumber("")
