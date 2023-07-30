@@ -8,7 +8,8 @@ export const Calculator = () => {
     const handleClick = ({ target }) => {
         setNumber(n => n + target.textContent);
         if (!isOnceClicked) {
-            if (number.charAt(number.length - 1)) {
+            let operator = number.charAt(number.length - 1);
+            if (operator == "+" || operator == "-" || operator == "*" || operator == "/" || operator == "%") {
                 showResult();
                 setIsOnceClicked(true);
             }
