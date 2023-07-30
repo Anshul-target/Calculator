@@ -34,6 +34,11 @@ export const Calculator = () => {
             setResult("");
             return;
         }
+        if (number == "") {
+            setResult("")
+            return
+
+        }
 
         setResult((eval(number)).toString());
     }
