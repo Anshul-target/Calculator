@@ -10,16 +10,18 @@ export const Calculator = () => {
         setShowResult(true);
     }, [isShowResult])
     const handleClick = ({ target }) => {
-        setNumber(number + target.textContent);
+        setNumber(n => n + target.textContent);
         if (!isOnceClicked) {
             let operator = number.charAt(number.length - 1);
             if (operator == "+" || operator == "-" || operator == "*" || operator == "/" || operator == "%") {
                 showResult();
+
                 setIsOnceClicked(true);
+                console.log("hello");
             }
         }
         if (isOnceClicked) {
-
+            console.log("From dark side");
             showResult();
         }
     }
@@ -58,7 +60,7 @@ export const Calculator = () => {
 
         }
 
-        setResult((eval(number)).toString());
+        setResult(n => (eval(n)).toString());
     }
 
     return (
