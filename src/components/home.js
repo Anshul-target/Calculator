@@ -9,13 +9,19 @@ export const Calculator = () => {
     useEffect(() => {
         setShowResult(true);
     }, [isShowResult])
+
+    useEffect(() => {
+        // console.log(number);
+    }, [number]);
     const handleClick = ({ target }) => {
+        // console.log(target.textContent);
         setNumber(n => n + target.textContent);
+        // setNumber(n => n + target.textContent);
         console.log(number);
         if (!isOnceClicked) {
             let operator = number.charAt(number.length - 1);
             if (operator == "+" || operator == "-" || operator == "*" || operator == "/" || operator == "%") {
-                showResult();
+                // showResult();
 
                 setIsOnceClicked(true);
                 console.log("hello");
@@ -41,7 +47,10 @@ export const Calculator = () => {
             return
         }
         setNumber(number + target.textContent)
-        showResult();
+        if (isOnceClicked) {
+
+            showResult();
+        }
     }
 
     const showResult = () => {
