@@ -92,3 +92,96 @@ body {
 .output-box {
   font-size: 2rem;
 }
+/* Login Page CSS */
+
+.login-container {
+  /* border: 1px solid; */
+  /* width: 60%; */
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 80px;
+  padding-bottom: 100px;
+  border-radius: 7px;
+  background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+}
+
+.LogIN {
+  background-color: white;
+  border-radius: 7px;
+  width: 20%;
+  margin: auto;
+  margin-top: 5%;
+  min-height: 500px;
+  /* padding-top: 1rem; */
+  padding-bottom: 1.5rem;
+  padding-left: 25px;
+  padding-top: 10px;
+  /* flex-grow: 1; */
+  /* gap: 25px; */
+  justify-content: space-around;
+}
+.text-l {
+  /* text-align: center; */
+  transform: translateX(30%);
+  font-size: 1.8rem;
+  font-weight: 750;
+}
+.UserLog {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  /* flex-grow: 1; */
+  gap: 25px;
+}
+.SignUpPoint {
+  gap: 26px;
+}
+
+.input-Detail input {
+  padding-left: 20px;
+}
+.input-Detail p {
+  /* border: solid 1px red; */
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  font-size: 0.7rem;
+  padding-right: 10px;
+  color: rgba(0, 0, 0, 0.622);
+}
+
+.loginButton {
+  /* height: 220px; */
+  /* justify-content: space-between; */
+  gap: 2rem;
+}
+.loginButton button {
+  padding: 5px 0 5px 0;
+  background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+
+  color: white;
+  border-radius: 15px;
+}
+.SignUpPoint p {
+  text-align: center;
+}
+.icons {
+  /* border: 1px solid; */
+  justify-content: center;
+}
+.icons img {
+  /* border: 1px solid; */
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.icons img:hover {
+  cursor: pointer;
+}
+
+.AnotherPoint {
+  gap: 10px;
+}
