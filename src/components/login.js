@@ -2,21 +2,32 @@ import google from "../images/google-plus.png"
 import facebook from "../images/facebook.png"
 import twitter from "../images/twitter.png"
 import { Link } from "react-router-dom"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 // import { async } from "@firebase/util"
-import { auth } from "../config/firebase"
+import { auth, provider } from "../config/firebase"
 import { useEffect, useState } from "react"
 import { isEmpty } from "@firebase/util"
+import { useNavigate } from "react-router-dom";
 export const Login = () => {
     // useEffect(()=>{
     //     const initialEmpty=true;
 
     // })
+    const navigate = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isError, setIsError] = useState("")
     const isInvalid = password == "" || email == ""
     const [isEmpty, setIsEmpty] = useState("")
+    const handleGoogle = async () => {
+
+        try {
+            signInWithPopup(auth, provider);
+        }
+        catch (err) {
+            console.log(err.message)
+        }
+    }
     const handleLogin = async () => {
         setIsError("");
         setIsEmpty("")
@@ -29,8 +40,12 @@ export const Login = () => {
 
             setIsError("");
             await signInWithEmailAndPassword(auth, email, password);
+            navigate("/calculator")
+
 
         }
+
+
         catch (err) {
             setIsError(err.message);
             console.log(err.message)
@@ -63,7 +78,7 @@ export const Login = () => {
                         <div className="SignUpPoint flex flex-col ">
                             <p style={{ fontSize: "0.7rem" }}>Or Sign Up Using</p>
                             <div className=" icons flex flex-row ">
-                                <img src={google}></img>
+                                <img src={google} onClick={handleGoogle}></img>
                                 <img src={facebook}></img>
                                 <img src={twitter}></img>
                             </div>
