@@ -5,41 +5,61 @@ import { Link } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 // import { async } from "@firebase/util"
 import { auth } from "../config/firebase"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { isEmpty } from "@firebase/util"
 export const Login = () => {
+    // useEffect(()=>{
+    //     const initialEmpty=true;
+
+    // })
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isError, setIsError] = useState("")
+    const isInvalid = password == "" || email == ""
+    const [isEmpty, setIsEmpty] = useState("")
     const handleLogin = async () => {
+        setIsError("");
+        setIsEmpty("")
+        if (isInvalid) {
+            setIsEmpty("Field is empty")
+            return;
+        }
+
         try {
 
-            signInWithEmailAndPassword(auth, email, password);
+            setIsError("");
+            await signInWithEmailAndPassword(auth, email, password);
 
         }
         catch (err) {
             setIsError(err.message);
-            setEmail("");
-            setPassword("");
+            console.log(err.message)
+            setEmail("")
+            setPassword("")
+
         }
     }
+    console.log(email)
+    console.log(password)
 
     return (
         <div className="login-container">
 
             <div className="LogIN flex flex-col   " >
                 <h1 className="text-l">Login</h1>
-                {isError && <p>{isError}</p>}
+                {isError && <small><p style={{ textAlign: "center" }}>{isError}</p></small>}
+                {isEmpty && <small><p style={{ textAlign: "center" }}>{isEmpty} </p></small>}
                 <div className="UserLog ">
                     <div className="input-Detail flex flex-col  gap-y-2  ">
-                        <label htmlFor="username " className="text-xs font-xs ">Username</label>
-                        <input type="text" className="outline-none border-b border-grey text-xs pb-2" placeholder="Type Your UserName" id="username" value={email} onChange={({ target }) => setEmail(target.value)}></input>
+                        <label htmlFor="username " className="text-xs font-xs ">Email</label>
+                        <input type="text" className="outline-none border-b border-grey text-xs pb-2" placeholder="Type Your Email" id="username" value={email} onChange={({ target }) => setEmail(target.value)}></input>
                         <label htmlFor="password" className=" text-xs font-xs" >Password</label>
                         <input type="password" className="outline-none text-xs border-b border-grey pb-2 " id="password" placeholder="Type Your Password" value={password} onChange={({ target }) => setPassword(target.value)} ></input>
                         <p>Forgot password?</p>
 
                     </div>
                     <div className="loginButton flex flex-col ">
-                        <button type="button" onClick={handleLogin}>LOGIN</button>
+                        <button type="button" onClick={handleLogin} >LOGIN</button>
                         <div className="SignUpPoint flex flex-col ">
                             <p style={{ fontSize: "0.7rem" }}>Or Sign Up Using</p>
                             <div className=" icons flex flex-row ">
