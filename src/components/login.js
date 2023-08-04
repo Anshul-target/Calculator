@@ -2,30 +2,55 @@ import google from "../images/google-plus.png"
 import facebook from "../images/facebook.png"
 import twitter from "../images/twitter.png"
 import { Link } from "react-router-dom"
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
+import { signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth"
 // import { async } from "@firebase/util"
-import { auth, provider } from "../config/firebase"
+import { auth, provider, fProvider, tProvider } from "../config/firebase"
 import { useEffect, useState } from "react"
 import { isEmpty } from "@firebase/util"
 import { useNavigate } from "react-router-dom";
 export const Login = () => {
-    // useEffect(()=>{
-    //     const initialEmpty=true;
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged((currentUser) => {
+            setUser(currentUser);
 
-    // })
+        })
+
+    })
     const navigate = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isError, setIsError] = useState("")
-    const isInvalid = password == "" || email == ""
+    const isInvalid = password == "" || email == "";
+    const [user, setUser] = useState(null);
     const [isEmpty, setIsEmpty] = useState("")
     const handleGoogle = async () => {
-
+        setIsError("");
         try {
-            signInWithPopup(auth, provider);
+            await signInWithPopup(auth, provider);
+            navigate("/calculator")
         }
         catch (err) {
-            console.log(err.message)
+            setIsError(err.message);
+        }
+    }
+    const handleFacebook = async () => {
+        setIsError("");
+        try {
+            await signInWithPopup(auth, fProvider);
+            navigate("/calculator")
+        }
+        catch (err) {
+            setIsError(err.message);
+        }
+    }
+    const handleTwitter = async () => {
+        setIsError("");
+        try {
+            await signInWithPopup(auth, tProvider);
+            navigate("/calculator")
+        }
+        catch (err) {
+            setIsError(err.message);
         }
     }
     const handleLogin = async () => {
@@ -64,6 +89,7 @@ export const Login = () => {
                 <h1 className="text-l">Login</h1>
                 {isError && <small><p style={{ textAlign: "center" }}>{isError}</p></small>}
                 {isEmpty && <small><p style={{ textAlign: "center" }}>{isEmpty} </p></small>}
+                {user && <small><p style={{ textAlign: "center" }}>{user.displayName} </p></small>}
                 <div className="UserLog ">
                     <div className="input-Detail flex flex-col  gap-y-2  ">
                         <label htmlFor="username " className="text-xs font-xs ">Email</label>
@@ -79,12 +105,12 @@ export const Login = () => {
                             <p style={{ fontSize: "0.7rem" }}>Or Sign Up Using</p>
                             <div className=" icons flex flex-row ">
                                 <img src={google} onClick={handleGoogle}></img>
-                                <img src={facebook}></img>
-                                <img src={twitter}></img>
+                                <img src={facebook} onClick={handleFacebook}></img>
+                                <img src={twitter} onClick={handleTwitter}></img>
                             </div>
                             <div className="AnotherPoint flex flex-col ">
                                 <p style={{ fontSize: "0.7rem" }}>Or Sign Up Using</p>
-                                <p style={{ fontSize: "0.7rem" }}><Link to="/signup">SignUp</Link></p>
+                                <p style={{ fontSize: "0.7rem", color: "blue" }}><Link to="/signup">SignUp</Link></p>
                             </div>
                         </div>
                     </div>
