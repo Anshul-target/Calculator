@@ -9,13 +9,13 @@ import { useEffect, useState } from "react"
 import { isEmpty } from "@firebase/util"
 import { useNavigate } from "react-router-dom";
 export const Login = () => {
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged((currentUser) => {
-            setUser(currentUser);
+    // useEffect(() => {
+    //     const unsubscribe = onAuthStateChanged((currentUser) => {
+    //         setUser(currentUser);
 
-        })
+    //     })
 
-    })
+    // })
     const navigate = useNavigate();
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")

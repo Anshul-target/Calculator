@@ -22,7 +22,7 @@ export const SignUp = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isError, setIsError] = useState("")
-    const isInvalid = password == "" || email == "";
+    const isInvalid = password == "" || email == "" || firstName == "" || lastName == "";
     const [user, setUser] = useState(null);
     const [isEmpty, setIsEmpty] = useState("")
     // const handleGoogle = async () => {
@@ -82,6 +82,14 @@ export const SignUp = () => {
     //     }
     // }
 
+    const handleSignUp = () => {
+        if (isInvalid) {
+            setIsEmpty("Field is empty")
+            return;
+        }
+
+    }
+
 
     return (
         <div className="login-container">
@@ -93,8 +101,8 @@ export const SignUp = () => {
                 {user && <small><p style={{ textAlign: "center" }}>{user.displayName} </p></small>}
                 <div className="UserLog ">
                     <div className="input-Detail flex flex-col  gap-y-2  ">
-                        <input type="text" placeholder="First Name" className="outline-none border-b border-grey text-xs pb-2"></input>
-                        <input type="text" placeholder="Lat Name" className="outline-none border-b border-grey text-xs pb-2"></input>
+                        <input type="text" placeholder="First Name" className="outline-none border-b border-grey text-xs pb-2" value={firstName} onChange={({ target }) => setFirstName(target.value)}></input>
+                        <input type="text" placeholder="Lat Name" className="outline-none border-b border-grey text-xs pb-2" value={lastName} onChange={({ target }) => setLastName(target.value)}></input>
                         <input type="text" className="outline-none border-b border-grey text-xs pb-2" placeholder="Email" id="username" value={email} onChange={({ target }) => setEmail(target.value)}></input>
 
                         <input type="password" className="outline-none text-xs border-b border-grey pb-2 " id="password" placeholder="Password" value={password} onChange={({ target }) => setPassword(target.value)} ></input>
@@ -112,7 +120,7 @@ export const SignUp = () => {
                             </div> */}
                             <div className="AnotherPoint flex flex-col ">
 
-                                <p style={{ fontSize: "0.7rem", color: "blue" }}><Link to="/login">Already have an account?</Link></p>
+                                <p style={{ fontSize: "0.7rem", color: "black" }}>Already a member?<Link to="/login" style={{ color: "blue" }}>SignIn</Link></p>
                             </div>
                         </div>
                     </div>
