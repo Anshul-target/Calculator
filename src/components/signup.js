@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 
 import { auth, db } from "../config/firebase"
 import { useEffect, useState } from "react"
-import { addDoc, collection, query, where } from "firebase/firestore"
+import { addDoc, collection, query, where, getDocs } from "firebase/firestore"
 import { useNavigate } from "react-router-dom";
 export const SignUp = () => {
     // useEffect(() => {
@@ -83,27 +83,53 @@ export const SignUp = () => {
     // }
 
     const handleSignUp = async () => {
-        setIsEmpty("")
+        setIsEmpty("");
+        setIsError("");
         if (isInvalid) {
             setIsEmpty("Field is empty")
             return;
         }
         try {
-            const result = query(newCollection, where("email" == email));
-            console.log(result)
+            const result = query(newCollection, where("email", "==", email));
+            try {
+                const docs = await getDocs(result)
+                if (docs.empty) {
+                    await addDoc(newCollection, {
+                        firstName,
+                        lastName,
+                        email,
+                        password
+                    })
+                    alert("Signup Sucessfull");
+                    setEmail("");
+                    setFirstName("");
+                    setLastName("");
+                    setPassword("");
+                }
 
-            setIsError("");
+
+                else {
+                    setIsError("The email already exist!");
+                    return
+                }
+            }
+            catch (err) {
+                setIsError(err.message);
+                setEmail("");
+                setFirstName("");
+                setLastName("");
+                setPassword("");
+            }
 
 
-            await addDoc(newCollection, {
-                firstName,
-                lastName,
-                email,
-                password
-            })
+
         }
         catch (err) {
             setIsError(err.message);
+            setEmail("");
+            setFirstName("");
+            setLastName("");
+            setPassword("");
         }
 
     }
