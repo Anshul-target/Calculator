@@ -1,12 +1,10 @@
-import google from "../images/google-plus.png"
-import facebook from "../images/facebook.png"
-import twitter from "../images/twitter.png"
+
 import { Link } from "react-router-dom"
-import { signInWithEmailAndPassword, signInWithPopup, onAuthStateChanged } from "firebase/auth"
-// import { async } from "@firebase/util"
-import { auth, provider, fProvider, tProvider } from "../config/firebase"
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
+
+import { auth, db } from "../config/firebase"
 import { useEffect, useState } from "react"
-import { isEmpty } from "@firebase/util"
+import { addDoc, collection, query, where } from "firebase/firestore"
 import { useNavigate } from "react-router-dom";
 export const SignUp = () => {
     // useEffect(() => {
@@ -23,8 +21,10 @@ export const SignUp = () => {
     const [password, setPassword] = useState("")
     const [isError, setIsError] = useState("")
     const isInvalid = password == "" || email == "" || firstName == "" || lastName == "";
-    const [user, setUser] = useState(null);
-    const [isEmpty, setIsEmpty] = useState("")
+    // const [emailExist, setEmailExists] = useState(false);
+    const emailExists = false;
+    const [isEmpty, setIsEmpty] = useState("");
+    const newCollection = collection(db, "CalUser");
     // const handleGoogle = async () => {
     //     setIsError("");
     //     try {
@@ -82,10 +82,28 @@ export const SignUp = () => {
     //     }
     // }
 
-    const handleSignUp = () => {
+    const handleSignUp = async () => {
+        setIsEmpty("")
         if (isInvalid) {
             setIsEmpty("Field is empty")
             return;
+        }
+        try {
+            const result = query(newCollection, where("email" == email));
+            console.log(result)
+
+            setIsError("");
+
+
+            await addDoc(newCollection, {
+                firstName,
+                lastName,
+                email,
+                password
+            })
+        }
+        catch (err) {
+            setIsError(err.message);
         }
 
     }
@@ -98,7 +116,7 @@ export const SignUp = () => {
                 <h1 className="text-l">SignUp</h1>
                 {isError && <small><p style={{ textAlign: "center" }}>{isError}</p></small>}
                 {isEmpty && <small><p style={{ textAlign: "center" }}>{isEmpty} </p></small>}
-                {user && <small><p style={{ textAlign: "center" }}>{user.displayName} </p></small>}
+
                 <div className="UserLog ">
                     <div className="input-Detail flex flex-col  gap-y-2  ">
                         <input type="text" placeholder="First Name" className="outline-none border-b border-grey text-xs pb-2" value={firstName} onChange={({ target }) => setFirstName(target.value)}></input>
