@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom"
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
+import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
 
 import { auth, db } from "../config/firebase"
 import { useEffect, useState } from "react"
@@ -51,8 +51,8 @@ export const SignUp = () => {
                     setFirstName("");
                     setLastName("");
                     setPassword("");
-                    signInWithEmailAndPassword(email, password);
-                    navigate("login")
+                    createUserWithEmailAndPassword(auth, email, password);
+                    navigate("/login")
                 }
 
 
