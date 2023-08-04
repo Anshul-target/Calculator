@@ -21,72 +21,18 @@ export const SignUp = () => {
     const [password, setPassword] = useState("")
     const [isError, setIsError] = useState("")
     const isInvalid = password == "" || email == "" || firstName == "" || lastName == "";
-    // const [emailExist, setEmailExists] = useState(false);
+
     const emailExists = false;
     const [isEmpty, setIsEmpty] = useState("");
     const newCollection = collection(db, "CalUser");
-    // const handleGoogle = async () => {
-    //     setIsError("");
-    //     try {
-    //         await signInWithPopup(auth, provider);
-    //         navigate("/calculator")
-    //     }
-    //     catch (err) {
-    //         setIsError(err.message);
-    //     }
-    // }
-    // const handleFacebook = async () => {
-    //     setIsError("");
-    //     try {
-    //         await signInWithPopup(auth, fProvider);
-    //         navigate("/calculator")
-    //     }
-    //     catch (err) {
-    //         setIsError(err.message);
-    //     }
-    // }
-    // const handleTwitter = async () => {
-    //     setIsError("");
-    //     try {
-    //         await signInWithPopup(auth, tProvider);
-    //         navigate("/calculator")
-    //     }
-    //     catch (err) {
-    //         setIsError(err.message);
-    //     }
-    // }
-    // const handleLogin = async () => {
-    //     setIsError("");
-    //     setIsEmpty("")
-    //     if (isInvalid) {
-    //         setIsEmpty("Field is empty")
-    //         return;
-    //     }
 
-    //     try {
-
-    //         setIsError("");
-    //         await signInWithEmailAndPassword(auth, email, password);
-    //         navigate("/calculator")
-
-
-    //     }
-
-
-    //     catch (err) {
-    //         setIsError(err.message);
-    //         console.log(err.message)
-    //         setEmail("")
-    //         setPassword("")
-
-    //     }
-    // }
 
     const handleSignUp = async () => {
         setIsEmpty("");
         setIsError("");
         if (isInvalid) {
-            setIsEmpty("Field is empty")
+            setIsEmpty("Field is empty");
+
             return;
         }
         try {
@@ -105,11 +51,17 @@ export const SignUp = () => {
                     setFirstName("");
                     setLastName("");
                     setPassword("");
+                    signInWithEmailAndPassword(email, password);
+                    navigate("login")
                 }
 
 
                 else {
                     setIsError("The email already exist!");
+                    setEmail("");
+                    setFirstName("");
+                    setLastName("");
+                    setPassword("");
                     return
                 }
             }
