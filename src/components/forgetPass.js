@@ -5,7 +5,7 @@ import { query, where, getDocs, collection } from "firebase/firestore"
 import { sendPasswordResetEmail } from "firebase/auth"
 export const ForgetPassword = () => {
     const [email, setEmail] = useState("")
-    const [error, setError] = ("")
+    const [error, setError] = useState("")
     const notFilled = email == "";
     const navigate = useNavigate();
     const getcollection = collection(db, "CalUser");
@@ -28,8 +28,8 @@ export const ForgetPassword = () => {
                 await sendPasswordResetEmail(auth, email);
                 alert("Password reset mail is sent ot your email");
                 setTimeout(() => {
-                    navigate("login")
-                })
+                    navigate("/login")
+                }, 3000)
             }
         }
         catch (err) {

@@ -96,7 +96,7 @@ export const Login = () => {
                         <input type="text" className="outline-none border-b border-grey text-xs pb-2" placeholder="Type Your Email" id="username" value={email} onChange={({ target }) => setEmail(target.value)}></input>
                         <label htmlFor="password" className=" text-xs font-xs" >Password</label>
                         <input type="password" className="outline-none text-xs border-b border-grey pb-2 " id="password" placeholder="Type Your Password" value={password} onChange={({ target }) => setPassword(target.value)} ></input>
-                        <p><link to="forgetPassword">Forgot password?</link></p>
+                        <p><Link to="forgetPassword">Forgot password?</Link></p>
 
                     </div>
                     <div className="loginButton flex flex-col ">
