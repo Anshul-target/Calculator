@@ -11,6 +11,7 @@ function App() {
       <Route path='/calculator' element={<Calculator />} />
       <Route path='login' element={<Login />} />
       <Route path='signup' element={<SignUp />} />
+      <Route path='forgetPassword' element={<ForgetPassword />} />
     </Routes>
   )
 }
