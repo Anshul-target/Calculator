@@ -1,18 +1,27 @@
 // import { HandleClick } from "../code/handleClick";
 import { useEffect, useState } from "react"
-
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../config/firebase";
+import { useNavigate } from "react-router-dom";
 export const Calculator = () => {
     const [isShowResult, setShowResult] = useState(false);
     const [isOnceClicked, setIsOnceClicked] = useState(false)
     const [number, setNumber] = useState("");
     const [result, setResult] = useState("");
+    const navigate = useNavigate();
     useEffect(() => {
         setShowResult(true);
     }, [isShowResult])
 
     useEffect(() => {
-        // console.log(number);
-    }, [number]);
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                navigate("/login");
+            }
+        })
+
+    })
+
     const handleClick = ({ target }) => {
         // console.log(target.textContent);
         setNumber(n => n + target.textContent);
