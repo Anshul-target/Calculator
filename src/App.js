@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 import { Routes, Route } from 'react-router-dom';
+import { ForgetPassword } from './components/forgetPass';
 import './App.css';
 import { Calculator } from './components/home';
 import { Login } from './components/login';
